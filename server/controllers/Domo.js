@@ -21,7 +21,7 @@ const makeDomo = (req, res) => {
   const domoData = {
     name: req.body.name,
     age: req.body.age,
-		level: req.body.level,
+    level: req.body.level,
     owner: req.session.account._id,
   };
 
@@ -44,19 +44,19 @@ const makeDomo = (req, res) => {
 };
 
 const deleteDomo = (req, res) => {
-	if (!req.body.id) {
-		return res.status(400).json({ error: 'RAWR! Missing id of Domo to delete' });
-	}
-	
-	return Domo.DomoModel.deleteById(req.body.id, (err, docs) => {
-		if (err) {
-			console.log(err);
-			return res.status(500).json({error: 'An internal server error ocurred'});
-		}
-		
-		return res.status(200).json({msg: 'Deletion successful'});
-	});
-}
+  if (!req.body.id) {
+    return res.status(400).json({ error: 'RAWR! Missing id of Domo to delete' });
+  }
+
+  return Domo.DomoModel.deleteById(req.body.id, (err) => {
+    if (err) {
+      console.log(err);
+      return res.status(500).json({ error: 'An internal server error ocurred' });
+    }
+
+    return res.status(200).json({ msg: 'Deletion successful' });
+  });
+};
 
 const getDomos = (request, response) => {
   const req = request;
@@ -76,5 +76,5 @@ module.exports = {
   makerPage,
   makeDomo,
   getDomos,
-	deleteDomo,
+  deleteDomo,
 };
